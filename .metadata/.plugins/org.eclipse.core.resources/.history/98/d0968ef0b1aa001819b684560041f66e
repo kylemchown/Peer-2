@@ -1,0 +1,83 @@
+package RPS;
+
+import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
+import java.util.Scanner;
+
+public class Game {
+
+	Game() {
+
+	}
+
+	public void runGame() {
+		Scanner s = new Scanner(System.in);
+		int totalGames = 0;
+		int computerWins = 0;
+		int playerWins = 0;
+		int playerRock = 0;
+		int playerPaper = 0;
+		String input = "";
+
+		while (input != "Exit") {
+			System.out.println("Rock/Paper/Scissors");
+			input = s.nextLine();
+			int r = ThreadLocalRandom.current().nextInt(1, 4);
+			switch (input) {
+			case "Rock":
+
+				playerRock++;
+				totalGames++;
+
+				if (r == 1) {
+					System.out.println("Rock! It's a tie");
+				} else if (r == 2) {
+					computerWins++;
+					System.out.println("Paper! Computer wins");
+				} else if (r == 3) {
+					playerWins++;
+					System.out.println("Scissors! You win");
+				}
+				break;
+			case "Paper":
+
+				playerPaper++;
+				totalGames++;
+
+				if (r == 1) {
+					System.out.println("Rock! You win");
+					playerWins++;
+				} else if (r == 2) {
+					System.out.println("Paper! It's a tie");
+				} else if (r == 3) {
+					computerWins++;
+					System.out.println("Scissors! Computer wins");
+				}
+				break;
+			case "Scissors":
+
+				totalGames++;
+
+				if (r == 1) {
+					System.out.println("Rock! Computer wins");
+					computerWins++;
+				} else if (r == 2) {
+					System.out.println("Paper! You win");
+					playerWins++;
+				} else if (r == 3) {
+					System.out.println("Scissors! It's a tie");
+				}
+				break;
+			case "Exit":
+				System.out.println("Total games played: " + totalGames);
+				System.out.println("Computer wins: " + computerWins);
+				System.out.println("Computer percentage: " + computerWins / totalGames * 100);
+				System.out.println("Your wins: " + playerWins);
+				System.out.println("Your percentage: " + playerWins / totalGames * 100);
+				System.out.println("Ties: " + (totalGames - computerWins - playerWins));
+
+				s.close();
+			}
+		}
+	}
+}
